@@ -1,0 +1,72 @@
+#########################
+#########################
+# CONFIGURATION OPTIONS #
+#########################
+#########################
+
+TESTING_MODE:NO
+
+# -----------------------------------
+THREADS:4
+
+#############################
+# STEP 1: SAMPLE PROCESSING #
+#############################
+
+SAMPLES_PROCESS_STEP:NO
+USER_FASTQ_FOLDER:/home/antonios/Mock_Samples
+TRIM_SCORE:20
+MAXDIFF:50
+MINPCTID:90
+MINMERGELEN:200
+MAXMERGELEN:600
+FORWARD_TRIM:10
+REVERSE_TRIM:10
+EXPECTED_ERROR_RATE:0.005
+
+########################################
+# STEP 2: ALIGNMENT AND CLASSIFICATION #
+########################################
+
+ALIGNMENT_CLASSIFICATION_STEP:YES
+OUTPUT_FASTA_ALI_CLASS:/home/antonios/TIC-Pipeline/sina_output.fasta
+PDF_REGION_OUTPUT:/home/antonios/regions_extract.pdf
+
+####################################
+# STEP 3: EXTRACTION AND DENOISING #
+####################################
+
+EXTRACTION_STEP:YES
+INPUT_FASTA_EXTRACTION:/home/antonios/TIC-Pipeline/sina_output.fasta
+EXTRACTION_REGION_START:7000
+EXTRACTION_REGION_END:24000
+EXTRACTION_REGION_LIMIT:AUTOMATIC
+OUTPUT_FASTA_EXTRACTION:/home/antonios/TIC-Pipeline/extracted_with_tax.fasta
+
+# -----------------------------------
+
+ZOTU_CREATION_STEP:YES
+MIN_DENOISED_SIZE:1
+OUTPUT_ZOTUS_EXTRACTION:/home/antonios/TIC-Pipeline/zotus_with_tax.fasta
+
+
+########################################
+# STEP 4: Taxonomy-Informed-Clustering #
+########################################
+
+TAXONOMIC_CLUSTERING_STEP:YES
+CLUSTERING_DIRECTORY:/home/antonios/TIC-Pipeline/aaa
+INPUT_FASTA_CLUSTERING:/home/antonios/TIC-Pipeline/zotus_with_tax.fasta
+FAMILY_IDENTITY:90
+GENERA_IDENTITY:95
+SPECIES_IDENTITY:97
+
+############################
+# STEP 5: Results Creation #
+############################
+
+RESULTS_REPORTING_STEP:YES
+OUTPUT_FOLDER:/home/antonios/TIC-Pipeline/results/
+OUTPUT_ZOTU_FASTA_WITH_TAXONOMY:zotus_with_taxonomy.fasta
+OUTPUT_ZOTU_TABLE:zotus_with_taxonomy.tab
+OUTPUT_SOTU_FASTA_WITH_TAXONOMY:sotus_with_taxonomy.fasta
